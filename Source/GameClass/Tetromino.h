@@ -80,13 +80,16 @@ class Tetromino {
         Point center;
         Point grid[4];
         Tetromino(int, Playfield*);
+        void resetPosition();
+
+        /** Getter **/
+        int getType();
 
         bool moveDown();
         void moveLeft();
         void moveRight();
 
         void rotate(int);
-
         sf::Color getColor();
 
 };

@@ -23,6 +23,13 @@ Tetromino::Tetromino(int index, Playfield* pf) {
     color = test_color[index];
 }
 
+void Tetromino::resetPosition() {
+    Point point;
+    point.x = 5;
+    point.y = 18;
+    center = point;
+}
+
 bool Tetromino::moveDown() {
     if(isMoving)
         return false;
@@ -113,3 +120,7 @@ void Tetromino::rotate(int sens) {
     }
     isMoving = false;
  }
+
+int Tetromino::getType() {
+    return type;
+}
