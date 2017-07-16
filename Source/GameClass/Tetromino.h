@@ -84,6 +84,7 @@ class Tetromino {
 
         /** Getter **/
         int getType();
+        bool getGost(Point*);
 
         bool moveDown();
         void moveLeft();

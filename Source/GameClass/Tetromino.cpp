@@ -130,3 +130,19 @@ void Tetromino::rotate(int sens) {
 int Tetromino::getType() {
     return type;
 }
+
+bool Tetromino::getGost(Point* tmp) {
+
+    for (int i = 0; i < 4; i++) {
+        tmp[i].x = center.x + grid[i].x;
+    }
+    int offset = 0;
+    do{
+        offset++;
+        for(int i = 0; i < 4; i++){
+            tmp[i].y = center.y + grid[i].y - offset;
+        }
+    } while (!playfield->check(tmp));
+
+    return true;
+}
