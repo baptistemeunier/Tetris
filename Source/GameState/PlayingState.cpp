@@ -70,7 +70,10 @@ void PlayingState::handleEvents(sf::Event event) {
         {
             game->getTetromino()->rotate(1);
         }
-
+        if (event.key.code == sf::Keyboard::Space)
+        {
+            game->holdTetromino();
+        }
     }
  }
 
@@ -111,17 +114,30 @@ void PlayingState::draw() {
     text1.setFillColor(sf::Color::Red);
     app->getWindow()->draw(text1);
 
-    /** Draw next background **/
-    rectangle.setSize(sf::Vector2f(170, 75));
-    rectangle.setPosition(sf::Vector2f(370, 15 + 148 + 15));
+    /** Draw hold background **/
+    rectangle.setSize(sf::Vector2f(170, 150));
+    rectangle.setPosition(sf::Vector2f(370, 15 + 150 + 15));
     app->getWindow()->draw(rectangle);
 
-    /** Draw next text **/
+    /** Draw hold text **/
+    sf::Text text("Hold", font);
+    text.setCharacterSize(30);
+    text.setPosition(385, 20 + 150 + 15);
+    text.setStyle(sf::Text::Bold);
+    text.setFillColor(sf::Color::Red);
+    app->getWindow()->draw(text);
+
+    /** Draw Info background **/
+    rectangle.setSize(sf::Vector2f(170, 75));
+    rectangle.setPosition(sf::Vector2f(370, 15 + 300 + 30));
+    app->getWindow()->draw(rectangle);
+
+    /** Draw Info text **/
     std::string score = "Score : ";
     score += std::to_string(game->getScores());
     sf::Text text2(score, font);
     text2.setCharacterSize(15);
-    text2.setPosition(385, 30 + 148 + 15);
+    text2.setPosition(385, 30 + 300 + 30);
     text2.setStyle(sf::Text::Bold);
     text2.setFillColor(sf::Color::Red);
     app->getWindow()->draw(text2);
@@ -130,7 +146,7 @@ void PlayingState::draw() {
     level += std::to_string(game->getLevel());
     sf::Text text3(level, font);
     text3.setCharacterSize(15);
-    text3.setPosition(385, 25 + 30 + 148 + 15);
+    text3.setPosition(385, 25 + 30 + 300 + 30);
     text3.setStyle(sf::Text::Bold);
     text3.setFillColor(sf::Color::Red);
     app->getWindow()->draw(text3);
@@ -153,6 +169,19 @@ void PlayingState::draw() {
         );
         caseUse.setFillColor(game->getNextTetromino()->getColor());
         app->getWindow()->draw(caseUse);
+    }
+
+    /** Draw Hold tetromino **/
+    if(game->getHoldTetromino() != nullptr) {
+        for(int i=0; i < 4;i++){
+            caseUse.setPosition(sf::Vector2f(
+                    (370+15+34) + (game->getHoldTetromino()->grid[i].x)*34,
+                    (15+150+15+15+50+34) + (-game->getHoldTetromino()->grid[i].y)*34)
+            );
+            caseUse.setFillColor(game->getHoldTetromino()->getColor());
+            app->getWindow()->draw(caseUse);
+        }
+
     }
 }
 

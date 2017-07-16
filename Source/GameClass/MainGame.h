@@ -33,8 +33,8 @@ private:
 public:
     Tetromino* getTetromino() const;
     Tetromino* getNextTetromino() const;
+    Tetromino* getHoldTetromino() const;
 
-public:
     void init(PlayingState*);
     void clean();
 

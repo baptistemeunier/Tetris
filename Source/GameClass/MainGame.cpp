@@ -42,6 +42,10 @@ Tetromino* MainGame::getNextTetromino() const {
     return next;
 }
 
+Tetromino* MainGame::getHoldTetromino() const {
+    return hold;
+}
+
 void MainGame::newTetromino() {
     canHold = true;
     if(tetromino != nullptr) {
