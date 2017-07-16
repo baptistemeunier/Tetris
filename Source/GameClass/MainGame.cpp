@@ -7,6 +7,12 @@
 #include "../GameState/PlayingState.h"
 
 void MainGame::init(PlayingState* s) {
+    if (!music.openFromFile("./../Ressources/Musics/theme.ogg"))
+        exit(1);
+    music.play();
+    music.setVolume(20);
+    music.setLoop(true);
+
     state = s;
     playfield.init(this);
     newTetromino();
@@ -68,6 +74,7 @@ void MainGame::newTetromino() {
     next = new Tetromino(order[orderCurrent], &playfield);
     if(playfield.checkLose(tetromino)) {
         state->stopGame();
+        music.stop();
     }
 }
 
@@ -78,6 +85,7 @@ void MainGame::addScores(int line) {
         level++;
         toNextLevel = 10 + toNextLevel;
         speed -= speed/3;
+        music.setPitch(1 + level/100);
     }
 }
 

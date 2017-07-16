@@ -7,12 +7,17 @@
 
 
 #include <SFML/System/Clock.hpp>
+#include <SFML/Audio.hpp>
+
 #include "Playfield.h"
 
 class PlayingState;
 
 class MainGame {
 private:
+    sf::Music music;
+
+
     PlayingState* state;
     int order[7] = {0, 1, 2, 3, 4, 5, 6};
     Tetromino* next = nullptr;
