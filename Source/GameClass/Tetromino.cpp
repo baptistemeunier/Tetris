@@ -28,6 +28,12 @@ void Tetromino::resetPosition() {
     point.x = 5;
     point.y = 18;
     center = point;
+    for (int i = 0; i < 4; ++i) {
+        point.x = test_grid[type][0][i][0];
+        point.y = test_grid[type][0][i][1];
+        rotation = 0;
+        grid[i] = point;
+    }
 }
 
 bool Tetromino::moveDown() {

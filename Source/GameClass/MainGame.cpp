@@ -101,14 +101,15 @@ void MainGame::update() {
 void MainGame::holdTetromino() {
     if(canHold) {
         if(hold == nullptr){
+            tetromino->resetPosition();
             hold = tetromino;
             tetromino = nullptr;
             newTetromino();
         } else if (hold->getType() != tetromino->getType()) {
+            tetromino->resetPosition();
             Tetromino* tmp = tetromino;
             tetromino = hold;
             hold = tmp;
-            tetromino->resetPosition();
         }
         canHold = false;
     }
