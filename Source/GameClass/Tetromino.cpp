@@ -131,7 +131,7 @@ int Tetromino::getType() {
     return type;
 }
 
-bool Tetromino::getGost(Point* tmp) {
+bool Tetromino::getGhost(Point* tmp) {
 
     for (int i = 0; i < 4; i++) {
         tmp[i].x = center.x + grid[i].x;

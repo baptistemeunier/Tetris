@@ -151,6 +151,20 @@ void PlayingState::draw() {
     text3.setFillColor(sf::Color::Red);
     app->getWindow()->draw(text3);
 
+    /** Draw ghost tetromino **/
+    Point tmp[4];
+    if(game->getTetromino()->getGhost(tmp)){
+        for(int i=0; i < 4;i++){
+            caseUse.setPosition(sf::Vector2f(
+                    15+(tmp[i].x)*34,
+                    15+(18 - tmp[i].y)*34)
+            );
+            sf::Color color(200, 200, 200);
+            caseUse.setFillColor(color);
+            app->getWindow()->draw(caseUse);
+        }
+    }
+
     /** Draw tetromino **/
    for(int i=0; i < 4;i++){
        caseUse.setPosition(sf::Vector2f(
