@@ -2,13 +2,9 @@
 // Created by baptiste on 13/07/17.
 //
 
-#include <iostream>
 #include "MainGame.h"
 #include "Tetromino.h"
 #include "../GameState/PlayingState.h"
-
-#include <algorithm>
-#include <ctime>
 
 void MainGame::init(PlayingState* s) {
     state = s;
@@ -26,6 +22,12 @@ void MainGame::clean() {
     if(tetromino != nullptr) {
         delete tetromino;
     }
+    if(next != nullptr) {
+        delete next;
+    }
+    if(hold != nullptr) {
+        delete hold;
+    }
 }
 
 Case** MainGame::getPlayfield() {
@@ -41,6 +43,7 @@ Tetromino* MainGame::getNextTetromino() const {
 }
 
 void MainGame::newTetromino() {
+    canHold = true;
     if(tetromino != nullptr) {
         delete tetromino;
     }
@@ -88,5 +91,21 @@ void MainGame::update() {
         if(getTetromino()->moveDown()) {
             newTetromino();
         }
+    }
+}
+
+void MainGame::holdTetromino() {
+    if(canHold) {
+        if(hold == nullptr){
+            hold = tetromino;
+            tetromino = nullptr;
+            newTetromino();
+        } else if (hold->getType() != tetromino->getType()) {
+            Tetromino* tmp = tetromino;
+            tetromino = hold;
+            hold = tmp;
+            tetromino->resetPosition();
+        }
+        canHold = false;
     }
 }

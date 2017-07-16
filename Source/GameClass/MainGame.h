@@ -18,6 +18,9 @@ private:
     Tetromino* next = nullptr;
     int orderCurrent = 10;
 
+    Tetromino* hold = nullptr;
+    bool canHold;
+
     Playfield playfield;
     Tetromino* tetromino = nullptr;
 
@@ -37,6 +40,7 @@ public:
 
     Case** getPlayfield();
     void newTetromino();
+    void holdTetromino();
 
     void update();
 
