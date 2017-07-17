@@ -10,11 +10,20 @@
 
 class ScoreManager {
     private:
+        static ScoreManager* m_instance;
+        ScoreManager() {};
+
         std::vector<Score> listScores;
-        bool read;
+        bool read = false;
         void readScoreFile();
+        void writeScoreFile();
+
+        Score* tmpScore = nullptr;
     public:
+        static ScoreManager* Instance();
         std::vector<Score> getScore();
+        void addScoreTmp(int score, int line);
+        void saveScore(std::string name);
 };
 
 

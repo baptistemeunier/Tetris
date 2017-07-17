@@ -14,9 +14,11 @@ class Score {
         int line;
 
     public:
-        Score(std::string, int, int);
+        Score(std::string name, int score, int line);
         bool operator<(Score const s) const { return score < s.score; }
         std::string getName();
+
+        std::string setName(std::string name);
         int getScore();
         int getLine();
 };

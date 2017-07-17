@@ -10,6 +10,12 @@ Score::Score(std::string n, int s, int l) {
     line = l;
 }
 
+
+std::string Score::setName(std::string n) {
+    name = n;
+    return name;
+}
+
 std::string Score::getName() {
     return name;
 }

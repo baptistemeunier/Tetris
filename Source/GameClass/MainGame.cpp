@@ -73,8 +73,8 @@ void MainGame::newTetromino() {
     }
     next = new Tetromino(order[orderCurrent], &playfield);
     if(playfield.checkLose(tetromino)) {
-        state->stopGame();
         music.stop();
+        state->stopGame();
     }
 }
 
