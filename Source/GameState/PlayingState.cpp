@@ -7,7 +7,7 @@
 #include "../GameClass/MainGame.h"
 #include "PauseState.h"
 #include "LoseState.h"
-
+#include "../GameClass/ScoreManager.h"
 
 PlayingState* PlayingState::m_instance = nullptr;
 
@@ -200,5 +200,6 @@ void PlayingState::draw() {
 }
 
 void PlayingState::stopGame() {
-    app->pushState(LoseState::Instance());
+    ScoreManager::Instance()->addScoreTmp(game->getScores(), game->getLevel()*10);
+    app->changeState(LoseState::Instance());
 }

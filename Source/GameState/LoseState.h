@@ -10,6 +10,9 @@
 
 class LoseState : public GameState{
     public:
+        std::string name = "";
+        bool needName;
+
         static LoseState* Instance();
         void init(AppEngine*);
         void clean();
@@ -21,6 +24,7 @@ class LoseState : public GameState{
     private:
         static LoseState *m_instance;
 
+        sf::Font font;
 };
 
 

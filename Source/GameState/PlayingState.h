@@ -26,7 +26,7 @@ class PlayingState : public GameState {
         sf::Font font;
 
         static PlayingState* m_instance;
-        PlayingState() {}
+        PlayingState() {};
 };
 
 #endif //CARDCLIENT_PLAYINGSTATE_H
