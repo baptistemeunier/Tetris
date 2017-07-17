@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include "Source/AppEngine.h"
-#include "Source/GameState/PlayingState.h"
+#include "Source/GameState/MainMenuState.h"
 
 
 using namespace std;
@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
     string name = "Tetris - Version ";
     name.append(VERSION);
     app.init(name);
-    app.pushState(PlayingState::Instance());
+    app.pushState(MainMenuState::Instance());
     app.routine();
     app.clean();
 }
