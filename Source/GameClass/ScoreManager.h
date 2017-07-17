@@ -10,17 +10,25 @@
 
 class ScoreManager {
     private:
+        /** Addresse du signleton **/
         static ScoreManager* m_instance;
         ScoreManager() {};
 
         std::vector<Score> listScores;
         bool read = false;
+
+        /** Lecture ecriture du fichier score **/
+        std::string filename = "./../Ressources/Files/scores";
         void readScoreFile();
         void writeScoreFile();
 
         Score* tmpScore = nullptr;
+
     public:
+        /** Appel du singleton **/
         static ScoreManager* Instance();
+        ~ScoreManager();
+
         std::vector<Score> getScore();
         void addScoreTmp(int score, int line);
         void saveScore(std::string name);

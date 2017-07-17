@@ -17,10 +17,15 @@ ScoreManager* ScoreManager::Instance() {
     return m_instance;
 }
 
+ScoreManager::~ScoreManager() {
+    delete tmpScore; // Liberation du pointeur
+
+}
 void ScoreManager::readScoreFile() {
-    std::ifstream infile("./../Ressources/Files/scores");
+    std::ifstream infile(filename);
     std::string line;
 
+    /** Lecture du fichier ligne par ligne **/
     while (std::getline(infile, line))
     {
         std::istringstream iss(line);
@@ -28,7 +33,6 @@ void ScoreManager::readScoreFile() {
         int score, nbLine;
         if (!(iss >> name >> score >> nbLine)) {
             std::cout << "ERREUR \n";
-            exit(1);
         }
         Score s(name, score, nbLine);
         listScores.push_back(s);
@@ -53,17 +57,18 @@ void ScoreManager::addScoreTmp(int score, int line) {
 
 void ScoreManager::writeScoreFile() {
     if(tmpScore != nullptr) {
-        listScores.push_back(*tmpScore);
-        std::sort (listScores.begin(), listScores.end());
+        listScores.push_back(*tmpScore); // Ajout du score
+        std::sort (listScores.begin(), listScores.end()); // Tri des scores
         std::reverse(listScores.begin(),listScores.end());
-        if(listScores.size() > 10) {
-            listScores.pop_back();
+        if(listScores.size() > 20) { // Si dépassement de la limite du nombre de score
+            listScores.pop_back(); // Retrait du dernier score
         }
-        delete tmpScore;
+        delete tmpScore; // Liberation du pointeur
         tmpScore = nullptr;
     }
+    /** Ecriture du fichier ligne par ligne **/
     std::ofstream myfile;
-    myfile.open ("./../Ressources/Files/scores");
+    myfile.open (filename);
     for (std::vector<Score>::iterator it=listScores.begin(); it!=listScores.end(); ++it)
         myfile << it->getName() << ' ' << it->getScore() << ' ' << it->getLine() << '\n';
     myfile.close();

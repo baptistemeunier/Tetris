@@ -15,10 +15,13 @@ class Score {
 
     public:
         Score(std::string name, int score, int line);
-        bool operator<(Score const s) const { return score < s.score; }
-        std::string getName();
 
+        /** Opperateur de comparaison pour le tri **/
+        bool operator<(Score const s) const { return score < s.score; }
+
+        /** Getter et setter **/
         std::string setName(std::string name);
+        std::string getName();
         int getScore();
         int getLine();
 };
